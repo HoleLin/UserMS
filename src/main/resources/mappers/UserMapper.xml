@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pojo.UserMapper">
+    <sql id="cols">
+        username,password,nickname,email
+    </sql>
+    <select id="checkUsername" resultType="entity.User">
+        select
+        <include refid="cols"/>
+        from tab_user where username = #{username}
+    </select>
+    <select id="findAll" resultType="entity.User">
+        select
+        <include refid="cols"/>
+        from tab_user
+    </select>
+    <insert id="insertUser" parameterType="entity.User">
+        insert into tab_user (username,password,nickname,email) values (#{userName},#{passWord},#{nickName},#{email})
+    </insert>
+    <update id="update" parameterType="entity.User">
+        update  tab_user set username=#{userName},password=#{passWord},nickname=#{nickName},email=#{email}
+        where  username=#{userName}
+    </update>
+    <delete id="delete" parameterType="string">
+        delete from tab_user
+        where username=#{username}
+    </delete>
+</mapper>
